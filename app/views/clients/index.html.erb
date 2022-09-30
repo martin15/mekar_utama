@@ -1,0 +1,44 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag  "masonry.pkgd.js" %>
+<% end %>
+
+<script type="text/javascript">
+  jQuery(function(){
+    $('.grid').masonry({
+      itemSelector: '.grid-item',
+      columnWidth: 140
+    });
+  });
+</script>
+
+<div id="sub-header-container">
+  <div class="sub-header">
+    <div class="title">Our Clients</div>
+  <div class="clear"></div>
+  </div>
+</div>
+
+<div id="content-conatiner">
+  <div class="content">
+    <div class="inner-content">
+      <div class="inner-content-info">
+        <div class="grid">
+          <% @clients.each do |client| %>
+            <div class="grid-item">
+              <%#= client.name %>
+              <%= image_tag client.client_image.url(:medium) %>
+            </div>
+          <% end %>
+
+        </div>
+
+        <%#*<ul class="list-client">%>
+          <%# @clients.each do |client| %>
+            <%#*<li><%#= client.name </li>%>
+          <%# end %>
+        <%#*</ul>%>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>

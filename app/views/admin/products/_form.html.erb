@@ -1,0 +1,86 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "/assets/ckeditor/ckeditor" %>
+<% end %>
+
+<div class="field">
+  <div class="input-title left"><%= f.label :name, "Name * :" %></div>
+  <div class="input-box left"><%= f.text_field :name %></div>
+</div>
+<div class="field clear-margin">
+  <div class="input-title left"><%= f.label :price, "Price :" %></div>
+  <div class="input-box left"><%= f.text_field :price %></div>
+</div>
+<div class="field clear-margin">
+  <div class="input-title left"><%= f.label :code, "Code :" %></div>
+  <div class="input-box left"><%= f.text_field :code %></div>
+</div>
+<div class="field clear-margin" style="margin-bottom:0px">
+  <div class="input-title left"><%= f.label :image, "Image * :" %></div>
+  <div class="input-box left"><%= f.file_field :image %></div>
+</div>
+<div class="field clear-margin">
+  <div class="input-title left">&nbsp;</div>
+  <div class="input-box left small-font">
+    Input image with size 800x600 (width x height)
+  </div>
+</div>
+<!--
+<%# unless params[:action] == "edit" %>
+  <%#= f.fields_for :product_images do |pi| %>
+    <%#= pi.hidden_field :is_primary, :value => true %>
+    <%#*<div class="field clear-margin">%>
+      <%#*<div class="input-title left"><%= pi.label :product_image, "Primary Image * :" %></div>%>
+      <%#*<div class="input-box left"><%= pi.file_field :product_image %></div>%>
+    <%#*</div>%>
+    <%#*<div class="field clear-margin">%>
+      <%#*<div class="input-title left">&nbsp;</div>%>
+      <%#*<div class="input-box left small-font">%>
+        <%#*Input image with size 400x300 (width x height)%>
+      <%#*</div>%>
+    <%#*</div>%>
+  <%# end %>
+<%# end %>-->
+<div class="field clear-margin" style="width:900px;height:auto;">
+  <div class="input-title left"><%= f.label :category_id, "Category * :" %></div>
+  <div class="input-box left" style="width:700px;">
+    <div class="input-box left" style="width:700px;">
+          <% Category.parent_categories.each_with_index do |parent_cat, i| %>
+            <%# style = "" %>
+            <% if i == 0 %>
+              <% style = "padding-right: 20px;border-right: 1px solid #000" %>
+            <% else %>
+              <% style = "padding-left: 20px;" %>
+            <% end %>
+            <div style="width:325px;float: left;<%= style %> ">
+              <div style="margin-bottom:15px"><%= parent_cat.name.titleize %> : </div>
+              <% parent_cat.child_categories.each do |cat| %>
+                <div style="margin-bottom:5px">
+                  <%= check_box_tag "product[category_id][]", cat.id, @product_category.include?(cat.id) %>&nbsp;
+                  <%= cat.name %>&nbsp;&nbsp;&nbsp;
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+    <%# Category.child_categories.each do |cat| %>
+      <%#= check_box_tag "product[category_id][]", cat.id, @product_category.include?(cat.id) %>&nbsp;
+      <%#= cat.name %>&nbsp;&nbsp;&nbsp;
+    <%# end %>
+    <%#= f.select :category_id, Category.child_categories.collect {|p| [ p.name, p.id ] } %>
+    <%#*<div class="category_list">%>
+      <%#*pencil%>
+    <%#*</div>%>
+    <%#*<div class="category_list">%>
+      <%#*Embroidery%>
+    <%#*</div>%>
+  </div>
+</div>
+<div class="field">
+  <div class="input-title left"><%= f.label :description, "Description :" %></div>
+  <div class="input-box left">&nbsp;</div>
+</div>
+<div class="field" style="height: 440px;">
+  <%= f.cktext_area :description,
+                    :ckeditor => {:uiColor => "#F5CDFA", :toolbar => "Basic",
+                                  :width=>'850px', :height=>'250px'}  %>
+</div>

@@ -1,0 +1,8 @@
+Hi, you got mail from<br /><br />
+Name : <%= @contact.name %><br />
+Email : <%= @contact.email %><br />
+content : <br />
+<p><%= raw @contact.content.gsub(/(?:\n\r?|\r\n?)/, '<br>') %></p>
+<br /><br />
+
+Thanks!

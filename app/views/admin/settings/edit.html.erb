@@ -1,0 +1,35 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "/assets/ckeditor/ckeditor" %>
+<% end %>
+
+<div class="admin-inner-content">
+  <div class="admin-inner-content-title">Edit <%= @setting.name.titleize %></div>
+  <div class="admin-inner-content-info">
+    <%= raw msg_flash(flash) %>
+    <%= form_for([:admin, @setting], 
+                  :url => admin_update_setting_path(:name => @setting.name),
+                  :html => { :multipart => true, :method => :put }) do |f| %>
+      <%= f.error_messages %>
+      <%# image = @setting.setting_image %>
+      <%# unless image.file? %>
+        <%#*<div style="height: 165px;">%>
+          <%#= image_tag image.url(:medium) %>
+        <%#*</div><br />%>
+      <%# end %>
+      <div class="field">
+        <div class="input-title left"><%= f.label :content, "Content :" %></div>
+        <div class="input-box left">&nbsp;</div>
+      </div>
+      <div class="field" style="height: 490px;">
+        <%= f.cktext_area :content,
+                          :ckeditor => {:uiColor => "#F5CDFA", :toolbar => "Basic",
+                                        :width=>'850px', :height=>'300px'}  %>
+      </div>
+      <div class="field">
+        <%= f.submit 'Update Setting' %>&nbsp;&nbsp;
+      </div>
+    <% end %>
+    <div class="clear"></div>
+  </div>
+</div>
+

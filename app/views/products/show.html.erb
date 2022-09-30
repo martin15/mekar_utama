@@ -1,0 +1,61 @@
+<% content_for :javascript_includes do %>
+  <%#= javascript_include_tag  "jquery.bxslider" %>
+  <%= javascript_include_tag  "jquery.jcarousel.min" %>
+  <%= javascript_include_tag  "jquery.pikachoose" %>
+  <%= javascript_include_tag  "jquery.touchwipe.min" %>
+  <%#= stylesheet_link_tag  "jquery.bxslider" %>
+  <%= stylesheet_link_tag  "bottom" %>
+<% end %>
+
+<script type="text/javascript">
+  <%#*(function($){%>
+    <%#*$(window).load(function(){%>
+        <%#*$("#content").mCustomScrollbar({%>
+          <%#*set_width:"100%",%>
+          <%#*scrollButtons:{%>
+          <%#*enable:true%>
+        <%#*},%>
+        <%#*theme:"light-2"%>
+      <%#*});%>
+    <%#*});%>
+  <%#*})(jQuery);%>
+
+  $(document).ready(
+  function (){
+    $("#pikame").PikaChoose({
+      carousel:true,
+      carouselOptions:{wrap:'circular'}
+    });
+  });
+</script>
+
+<div id="sub-header-container">
+  <div class="sub-header">
+    <div class="title">Product Detail</div>
+  <div class="clear"></div>
+  </div>
+</div>
+
+<div id="content-conatiner">
+  <div class="content">
+    <div class="inner-content">
+      <div class="inner-content-info" id="content">
+        <%#*<div class="product-detail-image-box">%>
+          <%#*&nbsp;%>
+        <%#*</div>%>
+        <div class="product-detail-image-box">
+          <ul id="pikame" class="jcarousel-skin-pika">
+            <% @product_images.each do |image| %>
+              <li><%= image_tag image.product_image.url(:large) %></li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="product-detail-info">
+          <div class="product-detail-product-name"><%= @product.name %></div>
+          <%= raw @product.description %>
+        </div>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>

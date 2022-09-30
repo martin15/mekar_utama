@@ -1,0 +1,16 @@
+<div class="admin-inner-content">
+  <div class="admin-inner-content-title">Clients</div>
+  <div class="admin-inner-content-info">
+    <%= raw msg_flash(flash) %>
+    <%= form_for([:admin, @client], :url => admin_clients_path,
+                 :html => { :multipart => true}) do |f| %>
+      <%= f.error_messages %>
+      <%= render :partial => 'form', :locals => { :f => f} %>
+      <div class="field">
+        <%= f.submit 'Create Client' %>&nbsp;&nbsp;
+        <%= link_to 'Back', admin_clients_path %>
+      </div>
+    <% end %>
+    <div class="clear"></div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="admin-inner-content">
+  <div class="admin-inner-content-title">Edit Product Images</div>
+  <div class="admin-inner-content-info">
+    <%= form_for([:admin, @product_image],
+                  :url => admin_product_product_image_path(@product.id),
+                  :html => { :multipart => true, :method => :put}) do |f| %>
+      <%= f.error_messages %>
+      <div style="height: 230px;">
+        <%= image_tag @product_image.product_image.url(:medium) %>
+      </div><br /><br />
+      <div class="field clear-margin">
+        <div class="input-title left"><%= f.label :product_image, "Image * :" %></div>
+        <div class="input-box left"><%= f.file_field :product_image %></div>
+      </div>
+      <div class="field clear-margin">
+        <div class="input-title left">&nbsp;</div>
+        <div class="input-box left small-font">
+          Input image with size 800x600 (width x height)
+        </div>
+      </div>
+       <div class="field clear-margin" style="height:120px!important;">
+        <div class="input-title left"><%= f.label :note, "Note :" %></div>
+        <div class="input-box left"><%= f.text_area :note, :size => "30x5" %></div>
+      </div>
+      <div class="field">
+        <%= f.submit 'Update Product Image' %>&nbsp;&nbsp;
+        <%= link_to 'Back', admin_product_path(@product.id) %>
+      </div>
+    <% end %>
+    <div class="clear"></div>
+  </div>
+</div>

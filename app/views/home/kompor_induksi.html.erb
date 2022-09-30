@@ -1,0 +1,422 @@
+<section class="main-section" style="padding-top:0px">
+  <div class="container-fluid faq-header">
+    <div class="row">
+      <div class="col-12">
+        <h1>How can we help you?</h1>
+        <span>FAQs</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container d-none d-md-block">
+    <div class="row faq-info-row row-eq-heigh">
+      <% Product::FAQ.each do |key, val| %>
+        <div class="col-12 col-md-4">
+          <div class="faq-info-container">
+            <div class="faq-info-title-container">
+              <div class="faq-info-title"><%= key.to_s.titleize %></div>
+            </div>
+              <% val.each_with_index do |v, x| %>
+                <div class="faq-info-subtitle-container">
+                  <div class="faq-subtitle-content">
+                    <div class="question-triangle"></div>
+                    <div class="question-title" data-target="<%= "#{key.to_s.parameterize}_#{x}" %>"><%= v %></div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="d-none d-md-block col-md-3 faq-nav mb-5">
+        <div class="sidebar-item">
+          <div class="make-me-sticky">
+            <ul>
+              <% Product::FAQ.each do |key, val| %>
+                <li><%= link_to key.to_s.titleize, "##{key.to_s.parameterize}" %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-9 faq-content">
+        <% Product::FAQ.each do |key, val| %>
+          <div class="faq-title" id="<%= key.to_s.parameterize %>"><%= key.to_s.titleize %></div>
+          <% val.each_with_index do |v, x| %>
+            <div class="faq-container">
+              <div class="faq-container-question" id="<%= "#{key.to_s.parameterize}_#{x}" %>" data-target="<%= v.downcase.parameterize %>">
+                <div class="faq-content-question"><%= v %></div>
+                <div class="faq-content-check">
+                  <div class="question-triangle-faq"></div>
+                </div>
+              </div>
+              <div class="line-separator-answer"></div>
+              <div class="faq-container-answer"></div>
+            </div>
+          <% end %>
+        <% end %>
+
+        <div class="hidden" id="bagaimana-caranya-beli-produk-kanahome">
+          Saat ini produk KANAhome hanya dapat dibeli secara online :)<br />
+          Anda dapat melakukan pembelian melalui :<br />
+          Whatsapp <%= link_to "+628112263767", "https://api.whatsapp.com/send?phone=+628112263767", target: "_blank" %> (no call, whatsapp only)<br />
+          Instagram <%= link_to "@KANAhome.id", "https://www.instagram.com/kanahome.id/", target: "blank" %><br />
+          Shopee <%= link_to "@KANAhome-id", "https://shopee.co.id/elektrigo", target: "blank" %><br />
+          Tokopedia <%= link_to "@KANAhome-id", "https://www.tokopedia.com/kanahome-id", target: "blank" %><br />
+          Blibli <%= link_to "@KANAhome-id", "https://www.blibli.com/merchant/kanahome-id/KAD-70005", target: "blank" %><br /><br />
+          Atau klik <%= link_to "link", "javascript:void(0)", data: {toggle: "modal", target: "#shop_modal"} %> ini ya!
+          <%= render partial: "modal"  %>
+        </div>
+
+        <div class="hidden" id="berapa-biaya-pengiriman-ke-tempat-saya">
+          Jika anda melakukan pembelian melalui Whatsapp atau Instagram, 
+          isi format order yang diberikan oleh admin kami, 
+          lalu admin kami akan menyampaikan biaya pengiriman ke alamat anda.<br /><br />
+
+          Jika anda melakukan pembelian melalui Shopee atau Tokopedia atau Blibli, 
+          aplikasi akan menghitungkan biaya kirim secara otomatis.
+        </div>
+
+        <div class="hidden" id="jika-saya-ada-pertanyaan-mengenai-produk-yang-saya-beli-kemana-saya-bisa-menghubungi">
+          Anda dapat melakukan pembelian melalui :<br />
+          Whatsapp <%= link_to "+628112263767", "https://api.whatsapp.com/send?phone=+628112263767", target: "_blank" %> (no call, whatsapp only)<br />
+          Instagram <%= link_to "@KANAhome.id", "https://www.instagram.com/kanahome.id/", target: "blank" %><br />
+          Shopee <%= link_to "@KANAhome-id", "https://shopee.co.id/elektrigo", target: "blank" %><br />
+          Tokopedia <%= link_to "@KANAhome-id", "https://www.tokopedia.com/kanahome-id", target: "blank" %><br />
+          Blibli <%= link_to "@KANAhome-id", "https://www.blibli.com/merchant/kanahome-id/KAD-70005", target: "blank" %><br /><br />
+
+          Jika anda bertanya mengenai kendala yang anda alami mengenai produk kami, 
+          lebih baik siapkan foto / video terkait ya, 
+          supaya admin bisa mengerti lebih jelas dan bisa memberikan solusi dengan lebih baik.
+        </div>
+
+        <div class="hidden" id="di-mana-letak-service-center-kanahome-kemana-saya-bisa-menghubungi">
+          Mayfair Building Lt. 1 Elektrigo<br />
+          Jl. Sukajadi no 228 Bandung<br /><br />
+
+          Anda dapat menghubungi <%= link_to "+628112263767", "https://api.whatsapp.com/send?phone=+628112263767", target: "_blank" %> 
+          (whatsapp only) atau telepon ke 022-20277424
+        </div>
+
+        <div class="hidden" id="saya-perlu-melakukan-klaim-garansi-bagaimana-caranya">
+          Hubungi kami melalui whatsapp 
+          <%= link_to "+628112263767", "https://api.whatsapp.com/send?phone=+628112263767", target: "_blank" %> (no call, whatsapp only). 
+          Jelaskan kendala yang anda temukan, sertakan foto/video terkait agar admin bisa 
+          mengerti lebih jelas dan memberikan solusi. 
+          Jika admin menganjurkan anda melakukan klaim garansi, 
+          siapkan foto invoice pembelian dan foto nomor seri produk. 
+          Nomor invoice dan nomor seri produk harus terlihat jelas di foto. 
+          Nomor seri produk kompor terdapat di bagian bawah kompor atau di dus kompor.<br /><br />
+
+          Biaya pengiriman barang ke KANAhome ditanggung pembeli, 
+          biaya service dan biaya pengiriman kembali produk ke pembeli ditanggung KANAhome.<br /><br />
+
+          Mohon agar tidak mengirimkan barang sebelum mendapat konfirmasi klaim garansi dari kami, 
+          karena tidak semua kerusakan dapat di-klaim.
+          Untuk jenis kerusakan yang dapat di-klaim garansi, baca disini.
+        </div>
+
+        <div class="hidden" id="produk-yang-saya-beli-cacat-rusak-saat-saya-terima-bagaimana-ketentuan-pengembalian">
+          Semua produk yang kami kirimkan telah melalui proses pemeriksaan baik secara fungsi 
+          maupun fisik. Kerusakan biasa terjadi saat pengiriman, karena itu untuk pembelian 
+          produk tertentu kami himbau untuk membeli asuransi pengiriman atau packing kayu. 
+          Klaim atas kerusakan barang diterima maksimal 2 hari setelah tanggal penerimaan.
+        </div>
+
+
+        <div class="hidden" id="bagaimana-cara-kerja-kompor-induksi">
+          Kompor induksi adalah kompor yang menggunakan daya listrik. 
+          Jadi tidak ada api yang digunakan. Kompor induksi memanaskan alat masak yang 
+          diletakkan di atasnya secara langsung dengan induksi magnetik. 
+          Alat masak tidak jadi panas karena permukaan kompor-nya panas seperti pada kompor gas. 
+          Tapi panas langsung dialirkan ke alat masak yang membuat masakan di dalamnya matang. 
+          Jadi, permukaan kompor tidak panas, aman jika tersentuh.
+        </div>
+
+        <div class="hidden" id="apakah-perbedaan-kompor-induksi-dan-kompor-listrik">
+          Sebenarnya istilah kompor listrik adalah untuk kompor yang menggunakan tenaga listrik. 
+          Kompor listrik itu antara lain memiliki dua jenis, yaitu : <br />
+          <ol>
+            <li>Kompor elektrik</li>
+            <li>Kompor induksi</li>
+          </ol><br /><br />
+
+          Apa perbedaannya?<br />
+          Kompor elektrik adalah kompor yang menggunakan resistor berukuran besar yang terbuat 
+          dari nikrom kawat. Panas dialirkan melalui permukaannya yang berbentuk melingkar 
+          seperti obat nyamuk.<br /><br />
+
+          Sedangkan kompor induksi adalah kompor yang memanaskan langsung alat masak di atasnya 
+          dengan induksi magnetik.<BR />
+          Perbedaan lainnya adalah :<br />
+          <ol>
+            <li>Kompor induksi menghasilkan panas yang lebih cepat, merata, dan konsisten 
+                daripada kompor elektrik, sehingga energi yang dibutuhkan lebih hemat dan 
+                waktu memasak pun lebih cepat.</li>
+            <li>Permukaan kompor induksi tidak panas, sedangkan permukaan kompor elektrik 
+                panas pada saat digunakan memasak. Namun keduanya sama-sama lebih aman, karena 
+                tidak menggunakan api sehingga dapat menghindari resiko kebakaran dan tidak 
+                membuang emisi seperti CO2.</li>
+          </ol>
+        </div>
+
+        <div class="hidden" id="kompor-induksi-lebih-baik-kenapa">
+          <h4>#1 Lebih Aman dan Ramah Lingkungan</h4>
+          <ul>
+            <li>Tidak ada resiko meledak jika tabung gas tidak terpasang dengan baik seperti pada kompor gas.</li>
+            <li>Permukaan kompor induksi tidak panas, aman jika tersentuh.</li>
+            <li>Ada sensor keamanan yang otomatis mematikan kompor jika suhu di permukaan sudah 
+                terlalu panas atau jika tidak ada alat masak diletakkan di atas kompor. 
+                Ada fitur timer sehingga kompor akan mati sendiri dalam waktu yang sudah di-set.</li>
+            <li>Untuk keluarga dengan anak-anak, kompor induksi KANAhome dapat menjadi pilihan 
+                karena dilengkapi dengan fitur child lock, yaitu fungsi mengunci tombol pada saat 
+                proses memasak sehingga anak-anak tidak dapat mengubah pengaturan memasak.</li>
+            <li>Kompor induksi lebih ramah lingkungan karena tidak ada api, tidak ada asap, 
+                berarti tidak mengeluarkan emisi karbondioksida. Kompor induksi juga tidak 
+                menghasilkan gas buang (reduksi) yang akan mengakibatkan polusi.</li>
+          </ul><br /><br />
+
+          <h4>#2 Bentuk Modern dan Minimalis</h4>
+          Kompor induksi KANAhome bisa membuat dapur anda terlihat minimalis dan modern. 
+          Untuk dapur yang berukuran lebih kecil, kompor induksi yang ramping ini akan lebih 
+          menghemat ruang, mudah untuk disimpan, lebih mudah untuk dibersihkan, dan karena 
+          tidak ada api, maka tidak akan membuat dapur yang kecil semakin panas saat memasak, 
+          anda tidak perlu basah kuyup dengan keringat setiap kali memasak.<br /><br />
+          
+          <h4>#3 Lebih praktis</h4>
+          Tidak perlu lagi repot memasang tabung gas, tidak perlu menyediakan ruang untuk 
+          menyimpan tabung gas yang besar dan berat, termasuk untuk menyimpan cadangannya. 
+          Untuk memasak, cukup sambungkan kompor induksi dengan listrik, lalu nyalakan.<br /><br />
+          
+          Untuk membersihkan, hanya perlu mengelap dengan cairan pembersih karena permukaan 
+          kompor rata dan terbuat dari kaca.<br /><br />
+
+          Kompor induksi KANAhome tersedia dalam model portable dan built-in. Dengan bentuk 
+          portable yang ramping juga ringan, anda dapat dengan mudah memindahkannya ke mana saja, 
+          asalkan ada sambungan listrik, langsung masak deh!<br /><br />
+
+          <h4>#4 Hemat Waktu</h4>
+          Pada kompor induksi, panas yang diterima oleh alat masak 90% efisien dan merata. 
+          Sedangkan kompor gas menghasilkan api yang tidak merata, kadang api besar di bagian 
+          tertentu sehingga panas hanya di sisi tertentu, panas yang diterima alat masak hanya 
+          65-70%. Karena itu, memasak dengan kompor induksi pun jadi lebih cepat. Selain itu, 
+          bagian bawah panci anda tidak akan menjadi hitam karena terkena panas api yang 
+          berlebihan.<br /><br />
+
+          <h4>#5 Smart Cooking</h4>
+          Memiliki smart features yang bisa memudahkan anda :<br />
+          <ul>
+            <li>Child-lock<br />
+                Mengunci tombol pengaturan sehingga anak-anak ( atau orang dewasa yang ceroboh ) 
+                tidak dapat mengubah pengaturan selama proses memasak.</li>
+            <li>Sensor keamanan<br />
+                Mematikan kompor otomatis apabila ada alat masak yang terlalu kecil 
+                (sendok/mangkok stainless yang tidak sengaja diletakkan di atas kompor) 
+                sehingga alat tersebut tidak menjadi panas dan melukai orang yang menyentuhnya. 
+                Sensor juga mematikan kompor apabila tidak ada alat masak yang diletakkan di 
+                atasnya atau apabila suhu di permukaan kompor sudah terlalu panas.</li>
+            <li>Timer<br />
+                Berfungsi mengatur agar kompor dapat mati otomatis di waktu yang sudah ditentukan. 
+                Menghindari masakan gosong karena ditinggal.</li>
+            <li>Mode memasak<br />
+                Memberikan berbagai anjuran panas untuk masakan yang berbeda.</li>
+          </ul>
+        </div>
+
+        <div class="hidden" id="alat-masak-seperti-apa-yang-bisa-digunakan-di-kompor-induksi">
+          <ul>
+            <li>Terbuat dari stainless steel / besi, atau dari bahan lainnya tapi memiliki 
+                lapisan induksi di bagian bawahnya, seperti berikut : <br/>
+                <%= image_tag "frypan.png", class: "img-fluid"  %><br />
+                Atau anda bisa klik <%= link_to "disini", root_path(anchor: "produk", alat_masak: true) %> untuk melihat alat masak induksi KANAhome.<br />
+                Cara mudahnya, tempelkan magnet pada bagian bawah alat masak (bisa menggunakan magnet kulkas yang ada di rumah). Jika magnet menempel, artinya alat masak tersebut bisa digunakan.
+
+            </li>
+            <li>Bagian bawah-nya datar. Untuk wajan cekung anda bisa memilih kompor induksi 
+                KANAhome tipe <%= link_to "K-68G", product_detail_path("tipe-k-68g") %>.</li>
+            <li>Diameter alat masak minimal 12 cm</li>
+          </ul>
+        </div>
+
+        <div class="hidden" id="berapa-watt-daya-yang-biasa-digunakan-untuk-memasak">
+          Tergantung jenis masakan yang akan dimasak. Agar lebih mudah, begini perbandingan besar 
+          watt pada kompor induksi dengan besar api pada kompor gas :<br />
+
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Kompor Gas</th>
+                <th scope="col">Kompor Induksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Api kecil</td>
+                <td>120 – 400 watt</td>
+              </tr>
+              <tr>
+                <td>Api sedang</td>
+                <td>600 – 800 watt</td>
+              </tr>
+              <tr>
+                <td>Api besar</td>
+                <td>1000 – 1600 watt</td>
+              </tr>
+              <tr>
+                <td>Api lebih besar</td>
+                <td>2200 watt</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="hidden" id="masak-dengan-kompor-induksi-lebih-hemat-dari-kompor-gas-buktinya-apa">
+          Iya, lebih hemat 15% lho!<br />
+          Kita coba memasak air 1 liter dengan :<br />
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Kompor Induksi Kanahome 1600 watt</th>
+                <th scope="col">Kompor gasApi Besar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Waktu Memasak</td>
+                <td><b>3 Menit 36 Detik √</b></td>
+                <td>4 Menit 10 Detik</td>
+              </tr>
+              <tr>
+                <td>Pemakaian Energi</td>
+                <td>0,100 kWH</td>
+                <td>0,015 kg</td>
+              </tr>
+              <tr>
+                <td>Tarif / Harga</th>
+                <td>Rp 1.467 / kWH</td>
+                <td>Rp 141.000 / tabung gas 12 kg = Rp 11.750 / kg</td>
+              </tr>
+              <tr>
+                <td>Biaya</th>
+                <td>0,100 x Rp 1.467 = <b>Rp 149,33</b> √</td>
+                <td>0,015 x Rp 11.750 = Rp 176,25</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="hidden" id="rumah-dengan-daya-listrik-1300-watt-bisakah-pakai-kompor-induksi">
+          Bisa. Karena kompor induksi KANAhome bisa diatur dari 120 watt saja.
+        </div>
+
+        <div class="hidden" id="perawatan-kompor-induksi-susah-ga">
+          Tidak susah. Untuk perawatan rutin yang utama adalah :<br />
+          <ul>
+            <li>Lap permukaan kompor setelah selesai memasak.</li>
+            <li>Setelah mematikan kompor, tunggu hingga bunyi kipas berhenti, 
+                baru cabut colokan dari sumber listrik.</li>
+            <li>Jangan menggunakan perpanjangan kabel tidak ber-SNI, 
+                dan jangan gunakan satu perpanjangan kabel bersama dengan barang elektronik 
+                lain yang daya nya besar (seperti microwave, air fryer dll).</li>
+            <li>Bersihkan bagian kipas dengan lap, untuk menghindari kotoran/ debu menghalangi 
+                saluran udara panas.</li>
+          </ul>
+        </div>
+
+        <div class="hidden" id="berapa-kapasitas-berat-yang-bisa-ditahan-kompor-induksi-kanahome">
+          Untuk kompor ukuran standar seperti K-625+, bisa menahan beban hingga 40 kg. 
+          Namun penggunaan terus menerus dengan beban maksimal dapat mempengaruhi kinerja dan 
+          fisik kompor.
+        </div>
+
+        <div class="hidden" id="bagaimana-ketentuan-garansi-kompor-induksi-kanahome">
+          <ul>
+            <li>Garansi diberikan selama 1 tahun sejak tanggal pembelian untuk produk kompor induksi 
+                KANAhome.</li>
+            <li>Kerusakan yang dapat di-klaim garansi adalah cacat produksi. Kerusakan karena 
+                kesalahan pembeli tidak dapat dilakukan klaim garansi 
+                ( pecah, konslet karena tidak mengikuti anjuran penggunaan, jatuh, dsb ).</li>
+            <li>Garansi tidak berlaku jika produk pernah dimodifikasi, digunakan dengan tidak benar, 
+                pernah diperbaiki bukan oleh service center resmi.</li>
+            <li>Invoice pembelian dan nomor seri produk harus diserahkan untuk meng-klaim garansi.</li>
+          </ul>
+        </div>
+
+        <div class="hidden" id="keiko-pan-terbuat-dari-apa">
+          Keiko Pan adalah alat masak marble coating dengan ketebalan 3mm 
+          (lebih tebal dari Teflon biasa). Tidak lengket, lebih kuat dan PFOA Free.
+        </div>
+
+        <div class="hidden" id="keiko-utensils-terbuat-dari-apa-aman-kah">
+          Keiko Utensils adalah alat masak dari silikon yang sudah bersertifikat 
+          food grade, sehingga aman untuk digunakan memasak dan tidak akan leleh.
+        </div>
+
+        <div class="hidden" id="keiko-utensils-tidak-akan-leleh-jika-dipakai-masak">
+          Tidak, Keiko Utensils menggunakan silikon tahan panas hingga 230oC. 
+          Bisa digunakan untuk menggoreng, menumis, memasak.
+        </div>
+
+        <div class="hidden" id="apa-maksudnya-bersertifikat-food-grade-dan-pfoa-free">
+          Artinya material yang digunakan sudah dianggap layak untuk memasak makanan, 
+          dan tidak mengandung bahan kimia berbahaya yang bisa memicu kanker.
+        </div>
+ 
+        <div class="hidden" id="bagaimana-perawatan-keiko-pan">
+          Gunakan alat masak berbahan silikon atau kayu, cuci dengan spons yang halus.
+        </div>
+		  </div>
+    </div>
+  </div>
+</section>
+
+
+
+<script>
+  $(document).ready(function () {
+    $(".faq-container-question").each(function() {
+      $(this).attr("data-position", $(this).offset().top.toString())
+    });
+
+    $(".question-title").click(function(){
+      target = $(this).attr("data-target")
+      $("#"+target).click();
+    })
+
+    $(".faq-container-question").click(function(){
+      if($(this).parent().hasClass("opened") && $(this).siblings().hasClass("opened")){
+        $(this).find(".faq-content-check").html("<div class='question-triangle-faq'></div>");
+        $(this).parent().removeClass("opened");
+        $(this).siblings().removeClass("opened");
+        $(this).children().removeClass("selected");
+        $(this).parent().find(".faq-container-answer").html("")
+
+      }else{
+        // clear all opened and selected class
+        $(".opened").removeClass("opened")
+        $(".selected").removeClass("selected")
+        $(".faq-container-answer").html("")
+        $(".faq-content-check").html("<div class='question-triangle-faq'></div>");
+
+        $(this).find(".faq-content-check").html("x");
+        $(this).parent().addClass("opened");
+        $(this).siblings().addClass("opened");
+        $(this).children().addClass("selected");
+        source = $(this).data("target")
+        text = "<div class='row'><div class='col-12 faq-a'>"+ $("#"+source).html() +"</div></div>"
+        $(this).parent().find(".faq-container-answer").html(text)
+      }
+
+      $('html, body').animate({
+          scrollTop: parseFloat($(this).attr("data-position")) - 85
+      }, 1000);
+
+    })
+  });
+</script>

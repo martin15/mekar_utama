@@ -1,0 +1,55 @@
+<div class="admin-inner-content">
+  <div class="admin-inner-content-title">New Product Images</div>
+  <div class="admin-inner-content-info">
+    <%= form_for([:admin, @product], 
+                  :url => admin_product_product_images_path(@product.id),
+                  :html => { :multipart => true, :method => :post}) do |f| %>
+      <%= f.error_messages %>
+      <div class="field clear-margin">
+        <div class="input-title left"><%= f.label :product_image, "Image * :" %></div>
+        <div class="input-box left"><%= f.file_field :product_image %></div>
+      </div>
+      <div class="field clear-margin">
+        <div class="input-title left">&nbsp;</div>
+        <div class="input-box left small-font">
+          Input image with size 800x600 (width x height)
+        </div>
+      </div>
+      <div class="field">
+        <%= f.submit 'Create Product Image' %>&nbsp;&nbsp;
+        <%= link_to 'Back', admin_products_path %>
+      </div>
+    <% end %>
+    <div class="admin-product-images-title">
+      Product Images
+    </div>
+    <% @product_images.each_with_index do |product_image, x| %>
+      <div class="admin-product-images">
+        <div class="pic">
+          <%= image_tag product_image.product_image.url(:medium) %>
+        </div>
+        <div class="action">
+          <span><%= product_image.is_primary? ? "Is Primary" :
+              (link_to "Set as Primary", set_primary_admin_product_product_image_path(
+                        :product_id => @product.id, :id => product_image.id)) %></span>|
+          <span><%= link_to "Edit", edit_admin_product_product_image_path(
+                                :product_id => @product.id, 
+                                :id => product_image.id ) %></span>|
+          <span><%= link_to "Delete", admin_product_product_image_path(
+                                :product_id => @product.id, :id => product_image.id ),
+                                :confirm => "Are you sure?", :method => :delete %></span>
+           <span class="best-seller">
+            <%= check_box_tag "is_best_seller", true, product_image.is_best_seller,
+                {:id => "best_#{x+1}", :onclick => "is_best_seller_picture('best_#{x+1}',
+                                                                         '#{@product.id}',
+                                                                         '#{product_image.id}');"} %>
+             <span>best seller</span>
+             <span><%= image_tag "bx_loader.gif", :size => "15x15",
+                                 :id => "loader_best_#{x+1}", :style => "display:none" %></span>
+           </span>
+        </div>
+      </div>
+    <% end %>
+    <div class="clear"></div>
+  </div>
+</div>

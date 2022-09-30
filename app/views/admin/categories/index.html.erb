@@ -1,0 +1,28 @@
+<div class="admin-inner-content">
+  <div class="admin-inner-content-title">Categories</div>
+  <div class="admin-inner-content-info">
+    <%= raw msg_flash(flash) %>
+    <%= link_to "Add New Categories", new_admin_category_path %><br /><br />
+    <div class="admin-row border">
+      <div class="no">No</div>
+      <div class="category-name">Name</div>
+      <div class="parent-name">Parent Category</div>
+      <div class="action">&nbsp;</div>
+    </div>
+    <% @categories.each_with_index do |category, x| %>
+      <div class="admin-row">
+        <div class="no"><%= x+1 %></div>
+        <div class="category-name"><%= category.name %></div>
+        <div class="parent-name"><%= category.try(:parent_category).try(:name) %></div>
+        <div class="action">
+          <%= link_to 'Edit', edit_admin_category_path(category.id) %>&nbsp;|&nbsp;
+          <%= link_to 'Delete', admin_category_path(category.id),
+                                :confirm => "Are you sure?", :method => :delete %>
+        </div>
+      </div>
+    <% end %>
+    <div class="paginate"><%= will_paginate @categories, :link_separator => " | ",
+                                 :previous_label => "&laquo; previous",
+                                 :next_label => "next &raquo;" %></div>
+  </div>
+</div>

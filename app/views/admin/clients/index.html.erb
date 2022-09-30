@@ -1,0 +1,28 @@
+<div class="admin-inner-content">
+  <div class="admin-inner-content-title">Clients</div>
+  <div class="admin-inner-content-info">
+    <%= raw msg_flash(flash) %>
+    <%= link_to "Add New Clients", new_admin_client_path %><br /><br />
+    <div class="admin-row border">
+      <div class="no">No</div>
+      <div class="image">Image</div>
+      <div class="client-name">Name</div>
+      <div class="action">&nbsp;</div>
+    </div>
+    <% @clients.each_with_index do |client, x| %>
+      <div class="admin-row with-pic">
+        <div class="no"><%= x+1 %></div>
+        <div class=" client-image"><%= image_tag client.client_image.url(:thumb) %></div>
+        <div class="client-name"><%= client.name %></div>
+        <div class="action">
+          <%= link_to 'Edit', edit_admin_client_path(client.id) %>&nbsp;|&nbsp;
+          <%= link_to 'Delete', admin_client_path(client.id),
+                                :confirm => "Are you sure?", :method => :delete %>
+        </div>
+      </div>
+    <% end %>
+    <div class="paginate"><%= will_paginate @clients, :link_separator => " | ",
+                                 :previous_label => "&laquo; previous",
+                                 :next_label => "next &raquo;" %></div>
+  </div>
+</div>

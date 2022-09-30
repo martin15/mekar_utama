@@ -1,0 +1,49 @@
+<% content_for :javascript_includes do %>
+
+<% end %>
+
+<div id="sub-header-container">
+  <div class="sub-header">
+    <div class="title"><%= @category.name.titleize %> Products</div>
+    <div class="image" style="animation-duration: 2s; animation-name: bounceInLeft;">
+      <%= image_tag "pencil_1.png" %>
+    </div>
+  <div class="clear"></div>
+  </div>
+</div>
+
+<section class="products pencil detail" style='padding-top: 50px'>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center mb-5">
+        <%= link_to "All #{@parent_category.name.titleize}", products_path('pencil'), class: "btn btn-outline-dark2 mr-2 #{'active' if 'pencil' == params[:permalink]}" %>
+        <% @child_categories.each do |child| %>
+          <%= link_to child.name, products_path(child.permalink), class: "btn btn-outline-dark2 mr-2 #{'active' if child.permalink == params[:permalink]}" %>
+        <% end %>
+      </div>
+    </div>
+    <div class="row row-eq-heigh">
+      <% @products.each do |product| %>
+        <div class="col-12 col-md-4 mb-4">
+          <div class="product">
+            <%= image_tag product.image.url('medium'), class: "img-fluid mb-4" %>
+            <div class="cat_name"><%= product.try(:categories).map(&:name).join(", ") %></div>
+            <div class="p_name"><%= product.name %></div>
+            <div class="price">
+              <%#= number_to_currency(10000000, unit: 'Rp ', separator: ',', delimiter: '.') %>
+            </div>
+            <hr />
+            <div class="p_spec">
+              <%#= raw product.description %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <div class="col-12 text-center">
+        <div class="paginate">
+          <%= paginate  @products %> 
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

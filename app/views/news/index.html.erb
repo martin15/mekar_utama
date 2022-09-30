@@ -1,0 +1,47 @@
+<div id="sub-header-container">
+  <div class="sub-header">
+    <div class="title">News</div>
+  <div class="clear"></div>
+  </div>
+</div>
+
+<div id="content-conatiner">
+  <div class="content">
+    <div class="inner-content">
+      <div class="inner-content-info">
+        <% @all_news.each do |news| %>
+          <div class="news">
+            <div class="news-content">
+              <div class="news-header">
+                <div class="news-title">
+                  <%= link_to news.title, show_news_path(:id => news.permalink) %>
+                </div>
+                <div class="news-date">
+                  <i class="fa fa-calendar-o"></i>
+                  <i>Uploaded at : </i><%= news.updated_at.strftime("%d %B %Y") %>
+                </div>
+              </div>
+              <% if news.news_image.file?  %>
+                <div class="news-short-image">
+                  <%= link_to (image_tag news.news_image.url(:thumb)), show_news_path(:id => news.permalink) %>
+                </div>
+              <% end %>
+              <div class="news-short-content">
+                <%= raw(short_desc(news.content, 400)) %>
+              </div>
+              <div class="news-more">
+                <%= link_to raw("<i class='fa fa-link'></i>&nbsp;&nbsp;Read more"),
+                                 show_news_path(:id => news.permalink), :class => "btn btn-primary" %>
+              </div>
+            </div>
+          <div class="clear"></div>
+          </div>
+        <% end %>
+        <div class="paginate"><%= will_paginate @all_news, :link_separator => " | ",
+                                     :previous_label => "&laquo; previous",
+                                     :next_label => "next &raquo;" %></div>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>

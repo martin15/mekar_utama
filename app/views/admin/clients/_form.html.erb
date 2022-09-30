@@ -1,0 +1,18 @@
+<div class="field">
+  <div class="input-title left"><%= f.label :name, "Name * :" %></div>
+  <div class="input-box left"><%= f.text_field :name %></div>
+</div>
+<div class="field clear-margin">
+  <div class="input-title left"><%= f.label :client_image, "Image * :" %></div>
+  <div class="input-box left"><%= f.file_field :client_image %></div>
+</div>
+<div class="field clear-margin">
+  <div class="input-title left">&nbsp;</div>
+  <div class="input-box left small-font">
+    Input image with size 200x200 (width x height)
+  </div>
+</div>
+<div class="field">
+  <div class="input-title left">&nbsp;</div>
+  <div class="input-box left"><%= f.check_box :best_client %>Best Seller</div>
+</div>

@@ -1,0 +1,38 @@
+<div id="sub-header-container">
+  <div class="sub-header">
+    <div class="title">Login</div>
+  <div class="clear"></div>
+  </div>
+</div>
+
+<div id="content-conatiner">
+  <div class="content">
+    <div class="inner-content">
+      <div class="inner-content-title">Login</div>
+      <div class="inner-content-info" id="content">
+        <%= raw msg_flash(flash) %>
+        <%= form_tag sessions_path do %>
+          <div class="field">
+            <div class="input-title left"><%= label_tag :email %></div>
+            <div class="input-box left">:&nbsp;&nbsp;
+              <%= text_field_tag :email, params[:email] %>
+            </div>
+          </div>
+          <div class="field">
+            <div class="input-title left"><%= label_tag :password %></div>
+            <div class="input-box left">:&nbsp;&nbsp;
+              <%= password_field_tag :password %>
+            </div>
+          </div>
+          <div class="field">
+            <div class="input-title left">&nbsp;</div>
+            <div class="input-box left">&nbsp;&nbsp;&nbsp;
+              <%= submit_tag "Login" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>

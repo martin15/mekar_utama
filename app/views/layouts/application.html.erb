@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <% if @meta_description.present? %>
+      <meta name="description" content="<%= @meta_description %>">
+    <% end %>
+    <meta name="author" content="">
+    <title><%= @meta_title ? @meta_title : ApplicationController::BRAND_NAME %></title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', 'style' %>
+    <%= javascript_include_tag 'application' %>
+    <%= yield :javascript_includes %>
+    <%= yield :css_includes %>
+    <!--[if lt IE 9]>
+      <script src="/assets/html5shiv.js"></script>
+      <script src="/assets/respond.min.js"></script>
+    <![endif]-->
+    <%
+=begin%>
+ <%= favicon_link_tag asset_path('favicon.ico') %> 
+<%
+=end%>
+  </head>
+
+  <body>
+    <% adjust_header = "" %>
+    <% unless current_user.nil? %>
+      <% adjust_header = "logged" %>
+      <section class="d-none d-sm-block logged-user">
+        <div class="row">
+          <div class="col-12 user-info-bar">
+            <div class="row">
+              <div class="col-md-6 hidden-xs">&nbsp;</div>
+              <div class="col-md-6 hidden-xs" id="login-pan">
+                <%= raw welcome_text %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    <% end %>
+
+    <!-- navbar -->
+    <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-white sticky-top <%= adjust_header %>">
+      <div class="container">
+        <%= link_to root_path, class: "navbar-brand logo" do %>
+          <%= image_tag "Mekar_Utama_logo.png", class: "img-fluid", alt: "Mekar Utama" %>
+        <% end %> 
+        <!-- menu bars -->
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul id="menu" class="nav links" >
+            <li class="<%= 'active' if action_name != "product_detail" %>  nav-item"><%= link_to "Home", root_path(anchor: "home") %></li>
+            <li class="<%= 'active' if action_name == "product_detail" %> nav-item"><%= link_to "Produk", root_path(anchor: "produk") %></li>
+            <li class="nav-item"><%= link_to "Klien Kami", root_path(anchor: "klien-kami") %></li>
+            <li class="nav-item"><%= link_to "Tentang Kami", root_path(anchor: "tentang-kami") %></li>
+            <li class="nav-item"><%= link_to "Hubungi Kami", root_path(anchor: "hubungi-kami") %></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <%= yield %>
+
+    <div class="fixed-bottom text-right">
+      <%= link_to (image_tag "icon-wa.png", class: "img-fluid contact-wa", alt: "Kanahome kompor indusksi"),
+                  "https://api.whatsapp.com/send?phone=+628112263767", target: "_blank" %>
+    </div>
+
+    <footer>
+      <div class="footer-top-area">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3 col-md-7 col-12">
+              <div class="fw-info footer-widget">
+                <div class="flogo">
+                  <%= image_tag "Mekar_Utama_logo.png", class: "logo2 img-fluid",
+                                style: "width:150px", alt: "Mekar Utama" %>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-5 col-12 mt-4">
+              <div class="fw-info footer-widget">
+                <h2 class="title tilte-mobile">Visit Us</h2>
+                <ul class="social">
+                  <li><%= link_to (image_tag "icon-shopee.png", class: "img-fluid"), 
+                                  "https://shopee.co.id/elektrigo", target: "blank" %></li>
+                  <li><%= link_to (image_tag "icon-tokopedia.png", class: "img-fluid"), 
+                                  "https://www.tokopedia.com/kanahome-id", target: "blank" %></li>
+                  <li><%= link_to (image_tag "icon-blibli.png", class: "img-fluid"), 
+                                  "https://www.blibli.com/merchant/kanahome-id/KAD-70005", target: "blank" %></li>
+                  <li class="mb-0"><%= link_to (image_tag "icon-instagram.png", class: "img-fluid"), 
+                                  "https://www.instagram.com/kanahome.id/", target: "blank" %></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-5 col-6 mt-4">
+              <div class="fw-links footer-widget">
+                <h2 class="title">About Us</h2>
+                <ul class="links">
+                  <li><%= link_to "Home", root_path(anchor: "home") %></li>
+                  <li><%= link_to "Tentang Kompor", root_path(anchor: "kompor-induksi") %></li>
+                  <li><%= link_to "Produk", root_path(anchor: "produk") %></li>
+                  <li><%= link_to "Hubungi Kami", root_path(anchor: "hubungi-kami") %></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-5 col-6 mt-4">
+              <div class="fw-contact footer-widget">
+                <h2 class="title">Contact info</h2>
+                <p class="text">
+                    MayFair Building, Lantai 1<br />
+                    Jl. Sukajadi No.228, Bandung 40153<br />
+                    Jawa Barat, Indonesia
+                  </p>
+                <ul class="info">
+                  <li><span><%= fa_icon "phone" %></span>022 2027 7424</li>
+                  <li><span><%= fa_icon "envelope" %></i></span>info@elektrigo.co.id</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom-area">
+        <div class="container">
+          <div class="row">
+              <div class="col-12">
+                <div class="copyright">
+                  <p>Copyright © <%= Date.today.year %> 
+                     <span class="custom-green">Mekar Utama</span>. All Rights Reserved.</p>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

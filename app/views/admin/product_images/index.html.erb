@@ -1,0 +1,32 @@
+<div class="admin-inner-content">
+  <div class="admin-inner-content-title">Product Images</div>
+  <div class="admin-inner-content-info">
+    <%= raw msg_flash(flash) %>
+    <%= link_to "Image without product", admin_product_images_path(:opt => "without_product") %>
+     &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+    <%= link_to "Image with product", admin_product_images_path(:opt => "with_product") %><br /><br />
+    <div class="admin-row border">
+      <div class="no">No</div>
+      <div class="image">Image</div>
+      <div class="client-name">Image Name</div>
+      <div class="action">&nbsp;</div>
+    </div>
+    <% @product_images.each_with_index do |product_image, x| %>
+      <div class="admin-row with-pic">
+        <div class="no"><%= @no+x+1 %></div>
+        <div class=" client-image"><%= image_tag product_image.product_image.url(:thumb) %></div>
+        <div class="client-name"><%= product_image.product_image_file_name %></div>
+        <div class="action">
+          <% if product_image.have_product %>
+            Already have product
+          <% else %>
+            <%= link_to 'Make a product', admin_product_images_new_product_path(product_image.id)  %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    <div class="paginate"><%= will_paginate @product_images, :link_separator => " | ",
+                                 :previous_label => "&laquo; previous",
+                                 :next_label => "next &raquo;" %></div>
+  </div>
+</div>

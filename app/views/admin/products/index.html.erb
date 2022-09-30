@@ -1,0 +1,38 @@
+<div class="admin-inner-content">
+  <div class="admin-inner-content-title">Products</div>
+  <div class="admin-inner-content-info">
+    <%= raw msg_flash(flash) %>
+    <%= link_to "Add New Product", new_admin_product_path %><br /><br />
+    <div class="admin-row border">
+      <div class="no">No</div>
+      <div class="product-image">Image</div>
+      <div class="product-name">Name</div>
+      <div class="product-price">Price</div>
+      <div class="product-category">Category</div>
+      <div class="product-action">&nbsp;</div>
+    </div>
+    <% @products.each_with_index do |product, x| %>
+      <div class="admin-row with-pic">
+        <div class="no"><%= x+1 %></div>
+        <div class="product-image">
+          <%#= image_tag product.primary_image("thumb") %>
+          <%= image_tag product.image.url("thumb") %>
+        </div>
+        <div class="product-name"><%= product.name %></div>
+        <div class="product-price">
+          <%= number_to_currency(product.price, :unit => "Rp. ", :separator => ",") %>
+        </div>
+        <div class="product-category"><%= product.categories.map(&:name).join(", ") %></div>
+        <div class="product-action">
+          <%#= link_to 'Add Image', admin_product_path(product.id) %><%#*&nbsp;|&nbsp;%>
+          <%= link_to 'Edit', edit_admin_product_path(product.id) %>&nbsp;|&nbsp;
+          <%= link_to 'Delete', admin_product_path(product.id),
+                                :confirm => "Are you sure?", :method => :delete %>
+        </div>
+      </div>
+    <% end %>
+    <div class="paginate"><%= will_paginate @products, :link_separator => " | ",
+                                 :previous_label => "&laquo; previous",
+                                 :next_label => "next &raquo;" %></div>
+  </div>
+</div>

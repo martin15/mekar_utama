@@ -1,0 +1,30 @@
+<div class="admin-inner-content">
+  <div class="admin-inner-content-title">News</div>
+  <div class="admin-inner-content-info">
+    <%= raw msg_flash(flash) %>
+    <%= link_to "Add New News", new_admin_news_path %><br /><br />
+    <div class="admin-row border">
+      <div class="no">No</div>
+      <div class="image">Image</div>
+      <div class="news-title">Title</div>
+      <div class="news-content_a">Content</div>
+      <div class="action">&nbsp;</div>
+    </div>
+    <% @all_news.each_with_index do |news, x| %>
+      <div class="admin-row with-pic">
+        <div class="no"><%= x+1 %></div>
+        <div class="image"><%= image_tag news.news_image.url(:thumb) %></div>
+        <div class="news-title text-left"><%= news.title %></div>
+        <div class="news-content_a"><%= raw(short_desc(news.content, 250)) %></div>
+        <div class="action">
+          <%= link_to 'Edit', edit_admin_news_path(news.id) %>&nbsp;|&nbsp;
+          <%= link_to 'Delete', admin_news_path(news.id),
+                                :confirm => "Are you sure?", :method => :delete %>
+        </div>
+      </div>
+    <% end %>
+    <div class="paginate"><%= will_paginate @all_news, :link_separator => " | ",
+                                 :previous_label => "&laquo; previous",
+                                 :next_label => "next &raquo;" %></div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<div id="sub-header-container">
+  <div class="sub-header">
+    <div class="title"><%= @news.title %></div>
+  <div class="clear"></div>
+  </div>
+</div>
+
+<div id="content-conatiner">
+  <div class="content">
+    <div class="inner-content">
+      <div class="inner-content-info" id="content">
+        <% if @news.news_image.file?  %>
+          <div class="news-detail-image">
+            <%= image_tag @news.news_image.url(:medium) %>
+          </div>
+        <% end %>
+        <div class="news-detail-content">
+          <div class="news-header">
+            <div class="news-detail-date">
+              <i class="fa fa-calendar-o"></i>
+              <i>Uploaded at : </i><%= @news.updated_at.strftime("%d %B %Y") %>
+            </div>
+          </div>
+          <div class="news-detail-full-content"><%= raw @news.content %></div>
+        </div>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>

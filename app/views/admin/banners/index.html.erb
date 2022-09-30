@@ -1,0 +1,23 @@
+<div class="admin-inner-content">
+  <div class="admin-inner-content-title">Banners</div>
+  <div class="admin-inner-content-info">
+    <%= raw msg_flash(flash) %>
+    <%= link_to "Add New Banner", new_admin_banner_path %><br /><br />
+    <div class="admin-row border">
+      <div class="no">No</div>
+      <div class="banner-image">Image</div>
+      <div class="action">&nbsp;</div>
+    </div>
+    <% @banners.each_with_index do |banner, x| %>
+      <div class="admin-row with-banner-pic">
+        <div class="no"><%= x+1 %></div>
+        <div class="banner-image"><%= image_tag banner.banner_image.url(:medium) %></div>
+        <div class="action">
+          <%= link_to 'Edit', edit_admin_banner_path(banner.id) %>&nbsp;|&nbsp;
+          <%= link_to 'Delete', admin_banner_path(banner.id),
+                                :confirm => "Are you sure?", :method => :delete %>
+        </div>
+      </div>
+    <% end %> 
+  </div>
+</div>

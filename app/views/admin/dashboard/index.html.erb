@@ -1,0 +1,53 @@
+<div class="admin-inner-content">
+  <div class="admin-inner-content-title">Welcome Admin</div>
+  <div class="admin-inner-content-info">
+    <%= raw msg_flash(flash) %>
+    <%= form_for([:admin, @red_info],
+                  :url => admin_update_setting_path(:name => 3)) do |f| %>
+      <%= hidden_field_tag "type", "id" %>
+      <div class="info-red-box">
+        <%= f.error_messages %>
+        <div class="info-red-box-title">
+          <%= f.label :name, "Title :" %>
+        </div>
+        <div class="info-red-box-field">
+          <%= f.text_field :name, :size => 20 %>
+        </div>
+        <div class="info-red-box-title">
+          <%= f.label :content, "Content :" %>
+        </div>
+        <div class="info-red-box-field">
+          <%= f.text_area :content, :size => "30x10" %>
+        </div>
+        <div class="info-red-box-title">&nbsp;</div>
+        <div class="info-red-box-field">
+          <%= f.button "Update" %>
+        </div>
+      </div>
+    <% end %>
+
+    <%= form_for([:admin, @blue_info],
+                  :url => admin_update_setting_path(:name => 4)) do |f| %>
+      <%= hidden_field_tag "type", "id" %>
+      <div class="info-blue-box">
+        <%= f.error_messages %>
+        <div class="info-red-box-title">
+            <%= f.label :name, "Title :" %>
+          </div>
+          <div class="info-red-box-field">
+            <%= f.text_field :name, :size => 20 %>
+          </div>
+          <div class="info-red-box-title">
+            <%= f.label :content, "Content :" %>
+          </div>
+          <div class="info-red-box-field">
+            <%= f.text_area :content, :size => "30x10" %>
+          </div>
+          <div class="info-red-box-title">&nbsp;</div>
+          <div class="info-red-box-field">
+            <%= f.button "Update" %>
+          </div>
+      </div>
+    <% end %>
+  </div>
+</div>

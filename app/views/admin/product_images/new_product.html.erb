@@ -1,0 +1,57 @@
+<%# content_for :javascript_includes do %>
+  <%#= javascript_include_tag "/assets/ckeditor/ckeditor" %>
+<%# end %>
+
+<div class="admin-inner-content">
+  <div class="admin-inner-content-title">Product</div>
+  <div class="admin-inner-content-info">
+    <%= raw msg_flash(flash) %>
+    <%= form_for([:admin, @product], :url => admin_product_images_create_product_path(@product_image.id),
+                  :html => { :multipart => true}) do |f| %>
+      <%= f.error_messages %>
+      <div class="field" style="height: 300px;">
+        <%= image_tag @product_image.product_image.url(:medium) %><br />
+        File name : <%= @product_image.product_image_file_name %>
+      </div>
+      <div class="field">
+        <div class="input-title left"><%= f.label :name, "Name * :" %></div>
+        <div class="input-box left"><%= f.text_field :name %></div>
+      </div>
+      <div class="field clear-margin">
+        <div class="input-title left"><%= f.label :price, "Price :" %></div>
+        <div class="input-box left"><%= f.text_field :price %></div>
+      </div>
+      <div class="field clear-margin">
+        <div class="input-title left"><%= f.label :code, "Code :" %></div>
+        <div class="input-box left"><%= f.text_field :code %></div>
+      </div>
+      <div class="field clear-margin" style="width:900px;height:auto;margin-bottom: 30px;">
+        <div class="input-title left"><%= f.label :category_id, "Category * :" %></div>
+        <div class="input-box left" style="width:700px;">
+          <% Category.parent_categories.each_with_index do |parent_cat, i| %>
+            <%# style = "" %>
+            <% if i == 0 %>
+              <% style = "padding-right: 20px;border-right: 1px solid #000" %>
+            <% else %>
+              <% style = "padding-left: 20px;" %>
+            <% end %>
+            <div style="width:325px;float: left;<%= style %> ">
+              <div style="margin-bottom:15px"><%= parent_cat.name.titleize %> : </div>
+              <% parent_cat.child_categories.each do |cat| %>
+                <div style="margin-bottom:5px">
+                  <%= check_box_tag "product[category_id][]", cat.id, @product_category.include?(cat.id) %>&nbsp;
+                  <%= cat.name %>&nbsp;&nbsp;&nbsp;
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="field">
+        <%= f.submit 'Create Product' %>&nbsp;&nbsp;
+        <%= link_to 'Back', admin_product_images_path %>
+      </div>
+    <% end %>
+    <div class="clear"></div>
+  </div>
+</div>

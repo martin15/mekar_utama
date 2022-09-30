@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MekarUtama</title>
+  <%= stylesheet_link_tag "light/light.css", "nivo-slider.css", "application" %>
+  <%= javascript_include_tag "jquery-1.7.1.min.js", "application.js", 
+                             "jquery.nivo.slider.js",
+                             "jquery.easing.1.3" %>
+  <%= yield :javascript_includes %>
+  <script type="text/javascript">
+    $(window).load(function() {
+        $('#slider').nivoSlider({
+          effect: 'fade',
+          pauseTime: 3000,
+          animSpeed: 400,
+          directionNav: false
+        });
+    });
+  </script>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div id="fix-menu">
+      <div id="nav-menu">
+        <ul class="first">
+          <li class="first-child"><%= link_to "Home", root_path %></li>
+          <li id="list-product">
+            <span>Products</span>
+            <%= link_to "Products", root_path, :id => "" %>
+            <ul id="parent-list-product">
+              <li class="first-child sub-menu">
+                <%= link_to "Pencil", products_path("Pencil") %>
+              </li>
+              <li class="first-child sub-menu">
+                <%= link_to "Embroidery", products_path("Embroidery") %>
+              </li>
+            </ul>
+          </li>
+          <li><%= link_to "News", news_path %></li>
+          <li><%= link_to "About Us", about_us_path %></li>
+          <li><%= link_to "Our Clients", clients_path %></li>
+          <li><%= link_to "Contact Us", contact_us_path %></li>
+          
+        </ul>
+        <div class="phone-number">
+          <span>(0274) 7491905  (Senin - Sabtu)</span>
+          <%= image_tag "call-icon.png", :id => "phone-logo" %>
+        </div>
+      </div>
+  </div>
+  <div id="container">
+    <div id="header-container">
+      <%#*<div class="header">%>
+        <%#*<div class="logo">%>
+          <%#= link_to (image_tag "logo.png"), root_path %>
+        <%#*</div>%>
+        <%#*<div class="h_contact_us_text">%>
+          <%#*<a href="ymsgr:SendIM?mekar_utama1">%>
+            <%#*<img border=0 src="http://opi.yahoo.com/online?u=mekar_utama1&m=g&t=12"%>
+                 <%#*width="94" height="70" />%>
+          <%#*</a>%>
+          <%#*<a href="ymsgr:SendIM?vr2praise">%>
+            <%#*<img border=0 src="http://opi.yahoo.com/online?u=vr2praise&m=g&t=12"%>
+                 <%#*width="94" height="70" />%>
+          <%#*</a>%>
+        <%#*</div>%>
+      <%#*</div>%>
+      <div class="product-type">
+        <%= link_to "Pencil" %>
+        <%= link_to "Pencil" %>
+      </div>
+    </div>
+
+    <div id="content-conatiner">
+      <div class="content">
+          <%= yield %>
+      <div class="clear"></div>
+      </div>
+    </div>
+
+    <div id="footer-container">
+      <div class="footer">
+        <div class="copyright">
+          <ul>
+            <li><%= link_to "home", root_path %></li>
+            <li><%= link_to "about us", about_us_path %></li>
+            <li><%= link_to "clients", clients_path %></li>
+            <li class="no-border"><%= link_to "contact us", contact_us_path %></li>
+          </ul><br />
+          Copyright © 2014, mekar-utama.com - all rights reserved
+        </div>
+        <div class="footer-menu">
+          <%= image_tag "logo.png" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

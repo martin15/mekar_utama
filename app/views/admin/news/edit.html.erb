@@ -1,0 +1,20 @@
+<div class="admin-inner-content">
+  <div class="admin-inner-content-title">Edit News</div>
+  <div class="admin-inner-content-info">
+    <%= raw msg_flash(flash) %>
+    <%= form_for([:admin, @news], :url => admin_news_path,
+                  :html => { :multipart => true, :method => :put }) do |f| %>
+      <%= f.error_messages %>
+      <div class="admin-news" style="height: 225px;">
+        <%= image_tag @news.news_image.url(:medium) %>
+      </div><br /><br />
+      <%= render :partial => 'form', :locals => { :f => f} %>
+      <div class="field">
+        <%= f.submit 'Update News' %>&nbsp;&nbsp;
+        <%= link_to 'Back', admin_news_index_path %>
+      </div>
+    <% end %>
+    <div class="clear"></div>
+  </div>
+</div>
+

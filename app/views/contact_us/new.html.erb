@@ -1,0 +1,141 @@
+<style>
+  .field_with_errors{
+    float: left;
+  }
+</style>
+<div id="sub-header-container">
+  <div class="sub-header">
+    <div class="title">Our Clients</div>
+  <div class="clear"></div>
+  </div>
+</div>
+
+<div id="content-conatiner">
+  <div class="content">
+    <div class="inner-content">
+      <div class="contact-left">
+        <div class="company-information">
+          <%= raw @contact_us_info.content %>
+          <div class="ym">
+            <a href="ymsgr:SendIM?mekar_utama1">
+              <img border=0 src="http://opi.yahoo.com/online?u=jerome_107&m=g&t=1" />
+            </a>
+            <a href="ymsgr:SendIM?vr2praise">
+              <img border=0 src="http://opi.yahoo.com/online?u=jerome_107&m=g&t=1" />
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="contact-right">
+        <div class="contact-us">
+          <%= form_for @contact_us, :url => contact_us_path,
+                      :html => {:method => :post} do |f| %>
+            <div class="field" style="float:none">
+              <% flash.each do |key, value| %>
+                <p class='<%= key %>'><%= raw value %></p><br />
+              <% end %>
+              <%= error_messages_for :contact_us %>
+            </div>
+            <div class="field">
+              <div class="contact-us-input-title"><%= f.label :email, "Email* : " %></div>
+              <div class="contact-us-input-box">
+                <%= f.text_field :email, :size => 24 %>
+              </div>
+            </div>
+            <div class="field">
+              <div class="contact-us-input-title"><%= f.label :name, "Name/Company:" %></div>
+              <div class="contact-us-input-box">
+                <%= f.text_field :name, :size => 24 %>
+              </div>
+            </div>
+            <div class="field" style="height: 170px;">
+              <div class="contact-us-input-title"><%= f.label :content, "Question* :" %></div>
+              <div class="contact-us-input-box">
+                <%= f.text_area :content %>
+              </div>
+            </div>
+            <div class="field">
+              <div class="contact-us-input-title">&nbsp;</div>
+              <div class="contact-us-input-box">&nbsp;&nbsp;&nbsp;&nbsp;
+                <%= show_simple_captcha %>
+              </div>
+            </div>
+            <div class="field">
+              <div class="contact-us-input-title">&nbsp;</div>
+              <div class="contact-us-input-box">&nbsp;&nbsp;<%= f.submit :SEND %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+
+
+
+
+
+
+<!--
+<%#*<div class="inner-content">%>
+  <%#*<div class="inner-content-title">Contact Us</div>%>
+  <%#*<div class="inner-content-info" id="content">%>
+    <%#*<div class="company-information">%>
+      <%#*<div class="name">Rima Tan</div><br />%>
+      <%#*E-mail:	mekar_utama1@yahoo.com<br />%>
+      <%#*Contact:	+6281 2243 7370/ +62-22-7037 1970<br />%>
+      <%#*Faks:	+62-22-4233 091<br />%>
+      <%#*Alamat:	Bandung, Jawa Barat, Indonesia<br />%>
+      <%#*<div class="ym">%>
+        <%#*<a href="ymsgr:SendIM?mekar_utama1">%>
+          <%#*<img border=0 src="http://opi.yahoo.com/online?u=jerome_107&m=g&t=1" />%>
+        <%#*</a>%>
+        <%#*<a href="ymsgr:SendIM?vr2praise">%>
+          <%#*<img border=0 src="http://opi.yahoo.com/online?u=jerome_107&m=g&t=1" />%>
+        <%#*</a>%>
+      <%#*</div>%>
+      <%#*<div class="gtalk">%>
+<%#*Google Talk: rimatan787@gmail.com</div>%>
+    <%#*</div>%>
+    <%#*<div class="contact-us">%>
+      <%#= form_for @contact_us, :url => contact_us_path,
+                  :html => {:method => :post} do |f| %>
+        <%#= raw msg_flash(flash) %>
+        <%#= error_messages_for :contact_us %>
+        <%#*<div class="field">%>
+          <%#*<div class="contact-us-input-title"><%= f.label :email, "Email*" %></div>%>
+          <%#*<div class="contact-us-input-box">:&nbsp;&nbsp;%>
+            <%#= f.text_field :email, :size => 24 %>
+          <%#*</div>%>
+        <%#*</div>%>
+        <%#*<div class="field">%>
+          <%#*<div class="contact-us-input-title"><%= f.label :name, "Name/Company" %></div>%>
+          <%#*<div class="contact-us-input-box">:&nbsp;&nbsp;%>
+            <%#= f.text_field :name, :size => 24 %>
+          <%#*</div>%>
+        <%#*</div>%>
+        <%#*<div class="field" style="height: 200px;">%>
+          <%#*<div class="contact-us-input-title"><%= f.label :contect, "Question*" %></div>%>
+          <%#*<div class="contact-us-input-box">:&nbsp;&nbsp;%>
+            <%#= f.text_area :content, :size => "36x12" %>
+          <%#*</div>%>
+        <%#*</div>%>
+        <%#*<div class="field">%>
+          <%#*<div class="contact-us-input-title">&nbsp;</div>%>
+          <%#*<div class="contact-us-input-box">&nbsp;&nbsp;&nbsp;&nbsp;%>
+            <%#= show_simple_captcha %>
+          <%#*</div>%>
+        <%#*</div>%>
+        <%#*<div class="field">%>
+          <%#*<div class="contact-us-input-title">&nbsp;</div>%>
+          <%#*<div class="contact-us-input-box">&nbsp;&nbsp;<%= f.submit :SEND %>%>
+          <%#*</div>%>
+        <%#*</div>%>
+      <%# end %>
+    <%#*</div>%>
+  <%#*</div>%>
+<%#*</div>%>-->
